@@ -5,6 +5,7 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <pre>{{items}}</pre>
   </div>
 </template>
 
@@ -18,3 +19,23 @@
   margin-top: 60px;
 }
 </style>
+
+<script>
+  export default{
+    data() {
+      return {
+        items: ''
+      }
+    },
+    created() {
+      this.API.Data.of('products').find(this.dataQueryBuilderSort)
+        .then((result) => {
+          this.items = result;
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        });
+    },
+  }
+</script>
