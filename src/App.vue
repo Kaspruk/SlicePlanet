@@ -1,12 +1,10 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-    <pre>{{items}}</pre>
-  </div>
+  <v-app class="mt-0">
+    <header-component></header-component>
+    <v-container class="pa-0" fluid>
+      <router-view/>
+    </v-container>
+  </v-app>
 </template>
 
 <style>
@@ -21,21 +19,14 @@
 </style>
 
 <script>
-  export default{
-    data() {
-      return {
-        items: ''
-      }
-    },
-    created() {
-      this.API.Data.of('products').find(this.dataQueryBuilderSort)
-        .then((result) => {
-          this.items = result;
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.error(error);
-        });
-    },
-  }
+import headerComponent from '@/components/HeaderComponent.vue'
+
+export default{
+  components: { headerComponent },
+  created() {
+    this.API.Data.of('categories').find(this.dataQueryBuilderSort).then((result) => {
+        this.$store.commit('SET_CATEGORIES', result)
+      });
+  },
+}
 </script>
