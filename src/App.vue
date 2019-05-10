@@ -26,6 +26,15 @@ import FooterComponent from '@/components/FooterComponent.vue'
 export default{
   components: { HeaderComponent, FooterComponent },
   created() {
+    this.API.Data.of('categories').find(this.dataQueryBuilderSort).then((result) => {
+      const arr = result;
+      arr.unshift({
+        objectId: null,
+        title: 'Все товары',
+      });
+      this.$store.commit('SET_CATEGORIES', arr)
+    });
+    this.$store.dispatch('GET_USER_CART_FROM_LOCALSTORAGE');
     const cache = this.API.LocalCache.getAll();
     if (cache.stayLoggedIn) {
       if (this.API.UserService.isValidLogin()) {
@@ -36,21 +45,6 @@ export default{
         this.API.LocalCache.clear();
       }
     }
-    this.API.Data.of('categories').find(this.dataQueryBuilderSort).then((result) => {
-        /*const arr = _.map(result, (r) => {
-          r.manufactures_filter.unshift({
-            name: 'Все компании',
-            objectId: null
-          });
-          return r
-        });*/
-        const arr = result;
-        arr.unshift({
-          objectId: null,
-          title: 'Все товары',
-        });
-        this.$store.commit('SET_CATEGORIES', arr)
-      });
   },
 }
 </script>

@@ -3,10 +3,13 @@
         <v-flex xs4 v-for="item in items" :key="item.objectId" class="pl-2 pr-2 mb-3 d-flex">
             <v-card>
                 <v-img :src="item.image" aspect-ratio="2.75"></v-img>
-                <v-card-title primary-title><h3 class="headline mb-0">{{item.title}}</h3></v-card-title>
+                <v-card-title primary-title><h3 class="headline text-sm-left mb-0">{{item.title}}</h3></v-card-title>
                 <v-spacer></v-spacer>
-                <v-card-text class="text-truncate">{{item.description}}</v-card-text>
-                <card-actions></card-actions>
+                <v-card-text class="text-truncate text-sm-left">{{item.description}}</v-card-text>
+                <card-actions :product="item"></card-actions>
+                <v-layout class="justify-end">
+                    <v-btn flat color="accent">Узнать больше</v-btn>
+                </v-layout>
             </v-card>
         </v-flex>
     </v-layout>

@@ -4,7 +4,7 @@ import './plugins/vuetify'
 import Backendless from 'backendless';
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import { store } from './store'
 import 'lodash';
 import './assets/style.sass'
 

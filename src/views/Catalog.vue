@@ -117,7 +117,6 @@ export default {
     },
     watch: {
         categories() {
-            console.log('create');
             this.setCurrentCategory();
         }
     },

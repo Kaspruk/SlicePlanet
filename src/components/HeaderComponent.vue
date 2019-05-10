@@ -20,10 +20,11 @@
         <v-badge
                 class="ml-3"
                 color="white"
+                v-model="cartCount"
                 overlap
         >
             <template v-slot:badge>
-                <span class="primary--text">1</span>
+                <span class="primary--text">{{cartCount}}</span>
             </template>
             <v-btn class="ma-0 basket" text fab color="transparent">
                 <v-icon color="white">fas fa-shopping-basket</v-icon>
@@ -33,10 +34,16 @@
 </template>
 
 <script>
-import {EventBus} from './../event-bus.js'
+    import {EventBus} from './../event-bus.js'
 
-export default {
+    export default {
     name: 'header-component',
+    data() {
+        return {
+            count: false,
+            cartCo: 0
+        };
+    },
     methods: {
         openDialog() {
             EventBus.$emit('open-dialog', true);
@@ -52,8 +59,11 @@ export default {
     computed: {
         user() {
             return this.$store.getters.USER;
+        },
+        cartCount() {
+            return this.$store.getters.USER_CART_ITEM_COUNT;
         }
-    }
+    },
 }
 </script>
 
