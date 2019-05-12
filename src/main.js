@@ -4,8 +4,9 @@ import './plugins/vuetify'
 import Backendless from 'backendless';
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import { store } from './store'
 import 'lodash';
+import './assets/style.sass'
 
 const APP_ID = '18D69D2E-15FE-994E-FF52-306D336F9F00';
 const API_KEY = '66F743BC-7A95-0572-FFBD-7EF5289AA100';

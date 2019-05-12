@@ -4,6 +4,7 @@
     <v-container class="pa-0" fluid>
       <router-view/>
     </v-container>
+    <footer-component></footer-component>
   </v-app>
 </template>
 
@@ -19,14 +20,31 @@
 </style>
 
 <script>
-import headerComponent from '@/components/HeaderComponent.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import FooterComponent from '@/components/FooterComponent.vue'
 
 export default{
-  components: { headerComponent },
+  components: { HeaderComponent, FooterComponent },
   created() {
     this.API.Data.of('categories').find(this.dataQueryBuilderSort).then((result) => {
-        this.$store.commit('SET_CATEGORIES', result)
+      const arr = result;
+      arr.unshift({
+        objectId: null,
+        title: 'Все товары',
       });
+      this.$store.commit('SET_CATEGORIES', arr)
+    });
+    this.$store.dispatch('GET_USER_CART_FROM_LOCALSTORAGE');
+    const cache = this.API.LocalCache.getAll();
+    if (cache.stayLoggedIn) {
+      if (this.API.UserService.isValidLogin()) {
+        this.API.UserService.getCurrentUser().then((user) => {
+          this.$store.commit('SET_USER', user);
+        });
+      } else {
+        this.API.LocalCache.clear();
+      }
+    }
   },
 }
 </script>
