@@ -8,7 +8,7 @@
                 <v-card-text class="text-truncate text-sm-left">{{item.description}}</v-card-text>
                 <card-actions :product="item"></card-actions>
                 <v-layout class="justify-end">
-                    <v-btn flat color="accent">Узнать больше</v-btn>
+                    <v-btn flat color="accent" :to="{ name: 'product-page', params: { objectId: item.objectId } }">Узнать больше</v-btn>
                 </v-layout>
             </v-card>
         </v-flex>

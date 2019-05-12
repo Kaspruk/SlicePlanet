@@ -23,11 +23,11 @@
             </v-flex>
             <v-flex xs3>
                 <v-card class="carts-item-sum">
-                    <v-flex class="pa-3">
+                    <div class="fixed-block pa-3">
                         <p class="headline text-sm-center mb-0 mr-1">Общая сума: {{itemsSum}}₴</p>
                         <v-divider class="my-4"></v-divider>
                         <v-btn class="accent" @click="deleteAllItem()">Очистить корзину</v-btn>
-                    </v-flex>
+                    </div>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -92,7 +92,7 @@ export default {
 .carts-item-sum
     height: 100%
     position: relative
-    .flex
+    .fixed-block
         position: sticky
         bottom: 10px
 
