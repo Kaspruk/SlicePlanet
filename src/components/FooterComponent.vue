@@ -106,7 +106,7 @@
                             <v-btn color="green darken-1" @click="logInUser" type="submit" outline>Войти</v-btn>
                             <v-spacer></v-spacer>
                             <v-btn color="blue darken-1" text @click="modalStatus = 'registration'" outline>Зарегестрироваться</v-btn>
-                            <v-btn color="red darken-1" text @click="dialog = false" outline>Закрыть</v-btn>
+                            <v-btn color="red darken-1" text @click="modal = false" outline>Закрыть</v-btn>
                         </v-layout>
                     </v-form>
                 </v-card>
