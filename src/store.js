@@ -63,9 +63,10 @@ export const store = new Vuex.Store({
             const index = _.findIndex(products, { objectId: someProduct.objectId });
             if (index !== -1) {
                 someProduct.count = +product.count + +products[index].count;
+                console.log(new Date());
                 products[index] = someProduct;
             } else {
-                products.push(someProduct);
+                products.unshift(someProduct);
             }
             //Vue.set(products, product.objectId, Object.assign({}, someProduct));
             context.commit('SET_USER_CART', products);

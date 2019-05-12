@@ -19,7 +19,9 @@
                     <p class="subheading font-weight-bold text-sm-left white--text">Выберите производителя:</p>
                     <v-checkbox
                             label="Все производители"
-                            @change="updateQuery('manufacture', null); manufacturesValue = []"
+                            v-model="allManufactures"
+                            :disabled="allManufactures"
+                            @change="manufacturesValue = []; updateQuery('manufacture', manufacturesValue)"
                             hide-details>
                     </v-checkbox>
                     <v-flex v-for="filter in categoriesSelect.manufactures_filter" :key="filter.objectId" >
@@ -50,6 +52,7 @@ export default {
         return {
             categoriesSelect: null,
             manufacturesValue: [],
+            allManufactures: true,
             products: null,
         }
     },
@@ -118,7 +121,10 @@ export default {
     watch: {
         categories() {
             this.setCurrentCategory();
-        }
+        },
+        manufacturesValue(val) {
+            this.allManufactures = !(val.length);
+        },
     },
     created() {
         this.getProducts();

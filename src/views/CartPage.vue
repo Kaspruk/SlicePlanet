@@ -13,7 +13,7 @@
                                 <card-actions :product="item"></card-actions>
                                 <v-spacer></v-spacer>
                                 <v-layout class="justify-space-between">
-                                    <v-btn flat color="accent">Узнать больше</v-btn>
+                                    <v-btn flat color="accent" :to="{ name: 'product-page', params: { objectId: item.objectId } }">Узнать больше</v-btn>
                                     <v-btn flat color="danger" @click="deleteItem(item.objectId)">Удалить элемент</v-btn>
                                 </v-layout>
                             </v-flex>
@@ -58,16 +58,20 @@ export default {
         deleteAllItem() {
             this.$store.commit('SET_USER_CART', []);
             localStorage.removeItem('localCart');
+            this.itemsSum = 0;
         }
     },
     computed: {
         cartItems() {
             return this.$store.getters.USER_CART
+        },
+        changeCount() {
+            return this.$store.getters.USER_CART_ITEM_COUNT
         }
     },
     watch: {
-        cartItems(val) {
-            if(val) this.getSum(val)
+        changeCount(val) {
+            if(val) this.getSum(this.cartItems)
         },
     },
     created() {
