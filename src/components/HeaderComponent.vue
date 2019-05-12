@@ -20,13 +20,13 @@
         <v-badge
                 class="ml-3"
                 color="white"
-                v-model="cartCount"
+                v-model="count"
                 overlap
         >
             <template v-slot:badge>
                 <span class="primary--text">{{cartCount}}</span>
             </template>
-            <v-btn class="ma-0 basket" text fab color="transparent">
+            <v-btn :to="{ name: 'cart-page' }" class="ma-0 basket" text fab color="transparent">
                 <v-icon color="white">fas fa-shopping-basket</v-icon>
             </v-btn>
         </v-badge>
@@ -64,6 +64,14 @@
             return this.$store.getters.USER_CART_ITEM_COUNT;
         }
     },
+    watch: {
+        cartCount(val){
+            this.count = !!(val && val > 0);
+        }
+    },
+    created() {
+        this.count = !!(this.cartCount && this.cartCount > 0);
+    }
 }
 </script>
 
